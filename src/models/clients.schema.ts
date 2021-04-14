@@ -16,6 +16,10 @@ const ClientSchema: Schema = new Schema(
       type: String,
       required: true,
     },
+    providers: {
+      type: Array,
+      required: false,
+    },
   },
   { timestamps: true }
 );
