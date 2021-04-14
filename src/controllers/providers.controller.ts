@@ -23,9 +23,9 @@ const ProviderController = {
   },
   async create(req: Request, res: Response) {
     try {
-      const { slug, name } = req.body;
+      const { name } = req.body;
       const exists = Providers.exists({
-        slug,
+        slug: slugify(name),
       });
       if (!exists) {
         const response = Providers.create({ name, slug: slugify(name) });
@@ -38,6 +38,64 @@ const ProviderController = {
     } catch (e) {
       return res.status(500).json({
         message: `Unable to create a provider`,
+        success: false,
+        path: req.path,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  },
+  async update(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const exists = Providers.exists({
+        _id: id,
+      });
+      if (!exists) {
+        return res.status(404).json({
+          message: "Provider doesn't exist",
+          success: false,
+          path: req.path,
+          timestamp: new Date().toISOString(),
+        });
+      }
+      const response = Providers.updateOne({ _id: id }, { ...req.body });
+      return res.status(200).json({
+        message: `Provider updated successfully`,
+        success: true,
+        data: response,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: `Unable to update a provider`,
+        success: false,
+        path: req.path,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  },
+  async delete(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const exists = Providers.exists({
+        _id: id,
+      });
+      if (!exists) {
+        return res.status(404).json({
+          message: `Provider doesn't exist`,
+          success: false,
+          path: req.path,
+          timestamp: new Date().toISOString(),
+        });
+      }
+      const response = Providers.deleteOne({ _id: id });
+      return res.status(204).json({
+        message: `Provider deleted successfully`,
+        success: true,
+        data: response,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: `Unable to update a provider`,
         success: false,
         path: req.path,
         timestamp: new Date().toISOString(),
