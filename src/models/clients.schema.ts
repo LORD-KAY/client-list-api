@@ -8,6 +8,10 @@ const ClientSchema: Schema = new Schema(
       type: String,
       required: true,
     },
+    slug: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       unique: true,
@@ -25,6 +29,7 @@ const ClientSchema: Schema = new Schema(
 // defining database
 export interface IClient extends Document {
   name: string;
+  slug: string;
   email: string;
   phone: string;
 }
