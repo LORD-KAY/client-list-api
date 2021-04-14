@@ -1,6 +1,7 @@
 import * as mongoose from "mongoose";
 import { Schema, model, Document, SchemaTypes } from "mongoose";
 import * as mongoosePaginate from "mongoose-paginate-v2";
+import Providers from "./providers.schema";
 const ClientSchema: Schema = new Schema(
   {
     name: {
@@ -16,10 +17,7 @@ const ClientSchema: Schema = new Schema(
       type: String,
       required: true,
     },
-    providers: {
-      type: Array,
-      required: false,
-    },
+    providers: [{ type: SchemaTypes.ObjectId, ref: Providers, default: null }],
   },
   { timestamps: true }
 );
