@@ -7,5 +7,10 @@ export default () => {
     .route("/providers")
     .get(ProviderController.list)
     .post(ProviderPolicy.create, ProviderController.create);
+
+  router
+    .route("/providers/:id")
+    .put(ProviderPolicy.create, ProviderController.update)
+    .delete(ProviderController.delete);
   return router;
 };
