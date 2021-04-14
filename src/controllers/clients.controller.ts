@@ -50,7 +50,7 @@ const clientController = {
       const { name } = req.body;
       const exists = await Clients.exists({ _id: id });
       if (!exists) {
-        return res.status(409).json({
+        return res.status(404).json({
           message: `Client doesn't exist`,
           success: false,
           timestamp: new Date().toISOString(),
@@ -61,14 +61,14 @@ const clientController = {
         { _id: id },
         { ...req.body, slug: slugify(name) }
       );
-      return res.status(201).json({
-        message: `Client created successfully`,
+      return res.status(200).json({
+        message: `Client updated successfully`,
         success: false,
         data: response,
       });
     } catch (e) {
       return res.status(500).json({
-        message: `Unable to create a new client`,
+        message: `Unable to update client`,
         path: req.path,
         success: false,
         timestamp: new Date().toISOString(),
@@ -80,7 +80,7 @@ const clientController = {
       const { id } = req.params;
       const exists = await Clients.exists({ _id: id });
       if (!exists) {
-        return res.status(409).json({
+        return res.status(404).json({
           message: `Client doesn't exist`,
           success: false,
           timestamp: new Date().toISOString(),
