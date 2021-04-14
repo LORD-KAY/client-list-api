@@ -1,5 +1,4 @@
 import * as mongoose from "mongoose";
-import Users from "./user.schema";
 import { Schema, model, Document, SchemaTypes } from "mongoose";
 import * as mongoosePaginate from "mongoose-paginate-v2";
 const ClientSchema: Schema = new Schema(
@@ -27,7 +26,7 @@ export interface IClient extends Document {
   email: string;
   phone: string;
 }
-
+mongoose.plugin(mongoosePaginate);
 // exporting client document from the schema
 const Clients: mongoose.PaginateModel<IClient> = model("clients", ClientSchema);
 
