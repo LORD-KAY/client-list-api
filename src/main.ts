@@ -9,6 +9,8 @@ import { AuthGuard } from "./guard/auth.guard";
 import * as fs from "fs";
 import * as path from "path";
 import * as SwaggerUI from "swagger-ui-express";
+import clientsRoute from "./routes/clients.route";
+import providersRoute from "./routes/providers.route";
 dotenv.config();
 
 async function server() {
@@ -48,7 +50,7 @@ async function server() {
     });
   });
 
-  app.use("/api/v1", [AuthGuard]);
+  app.use("/api/v1", [clientsRoute(), providersRoute()]);
 
   app.listen(app.get("PORT"), () => {
     console.log(`Application running at http://localhost:${app.get("PORT")}`);
