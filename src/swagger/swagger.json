@@ -2,7 +2,7 @@
 
     "swagger": "2.0",
     "info": {
-        "description": "This is a simple example NodeJS API project to demonstrate Swagger Documentation",
+        "description": "API documentation for the client list web service",
         "version": "1.0.0",
         "title": "Clients API",
         "contact": {
@@ -30,8 +30,21 @@
                             "type": "array",
                             "items": {}
                         }
+                    },
+                    "500": {
+                        "description": "Unable to get list of clients",
+                        "schema": {
+                            "type": "array",
+                            "items": {}
+                        }
                     }
                 }
+            },
+            "post": {
+                "summary": "Create a new client",
+                "description": "Create a new client",
+                "produces": "application/json",
+
             }
         },
         "/providers": {
