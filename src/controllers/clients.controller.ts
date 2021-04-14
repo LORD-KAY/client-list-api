@@ -1,10 +1,66 @@
 import { Request, Response } from "express";
-import Clients from "src/models/clients.schema";
-import { slugify } from "src/utils/helpers";
+import Clients from "../models/clients.schema";
+import { slugify } from "../utils/helpers";
 
 const clientController = {
   async list(req: Request, res: Response) {
     try {
+      const response = await Clients.aggregate([
+        {
+          $unwind: {
+            path: "$providers",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
+        {
+          $lookup: {
+            from: "providers",
+            localField: "providers",
+            foreignField: "_id",
+            as: "providers",
+          },
+        },
+        {
+          $group: {
+            _id: {
+              _id: "$_id",
+              name: "$name",
+              slug: "$slug",
+              phone: "$phone",
+              email: "$email",
+            },
+            providers: {
+              $push: {
+                $let: {
+                  vars: {
+                    p: {
+                      $arrayElemAt: ["$providers", 0],
+                    },
+                  },
+                  in: {
+                    _id: "$$p._id",
+                    name: "$$p.name",
+                  },
+                },
+              },
+            },
+          },
+        },
+        {
+          $project: {
+            _id: "$_id._id",
+            name: "$_id.name",
+            phone: "$_id.phone",
+            email: "$_id.email",
+            providers: "$providers",
+          },
+        },
+      ]);
+      return res.status(200).json({
+        message: `List of clients`,
+        success: true,
+        data: response,
+      });
     } catch (e) {
       return res.status(500).json({
         message: `Unable to get list of clients`,
