@@ -1,7 +1,4 @@
-import * as mongoose from "mongoose";
-import Users from "./user.schema";
-import { Schema, model, Document, SchemaTypes } from "mongoose";
-import * as mongoosePaginate from "mongoose-paginate-v2";
+import { Schema, model, Document, Model, SchemaTypes } from "mongoose";
 const ProviderSchema: Schema = new Schema(
   {
     name: {
@@ -19,7 +16,7 @@ export interface IProvider extends Document {
 }
 
 // exporting client document from the schema
-const Providers: mongoose.PaginateModel<IProvider> = model(
+const Providers: Model<IProvider> = model<IProvider>(
   "providers",
   ProviderSchema
 );
