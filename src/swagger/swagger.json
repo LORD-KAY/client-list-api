@@ -43,8 +43,7 @@
             "post": {
                 "summary": "Create a new client",
                 "description": "Create a new client",
-                "produces": "application/json",
-
+                "produces": "application/json"
             }
         },
         "/providers": {
