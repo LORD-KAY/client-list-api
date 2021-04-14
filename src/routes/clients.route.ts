@@ -1,5 +1,5 @@
 import * as express from "express";
-import { ClientPolicy } from "src/policies/validation.policy";
+import { ClientPolicy } from "../policies/validation.policy";
 import clientController from "../controllers/clients.controller";
 const router = express.Router();
 
