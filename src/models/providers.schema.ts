@@ -5,10 +5,13 @@ const ProviderSchema: Schema = new Schema(
       type: String,
       required: true,
     },
+    slug: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
-
 // defining database
 export interface IProvider extends Document {
   name: string;
