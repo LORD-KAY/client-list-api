@@ -1,0 +1,38 @@
+{
+
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple example NodeJS API project to demonstrate Swagger Documentation",
+        "version": "1.0.0",
+        "title": "Clients API",
+        "contact": {
+            "email": "offeilord@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http"],
+    "host": "localhost:8090",
+    "basePath": "/api/v1",
+    "paths" : {
+        "/clients": {
+            "get": {
+                "summary": "Get all clients list",
+                "description": "Get the list of all clients, add page and limit to get the paginated format",
+                "produces": "application/json",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of all clients",
+                        "schema": {
+                            "type": "array",
+                            "items": {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
