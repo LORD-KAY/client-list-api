@@ -1,4 +1,4 @@
-# HMS Rest API Service
+# Client List Rest API Service
 > An simple client list application backend service.
 > This application contains the rest api services talking to the frontend which can be found at [https://github.com/LORD-KAY/](hms-frontend)
 
