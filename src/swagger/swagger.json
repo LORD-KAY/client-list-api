@@ -33,6 +33,40 @@
                     }
                 }
             }
+        },
+        "/providers": {
+            "get": {
+                "summary": "Get list of all providers",
+                "description": "Get list of all providers",
+                "produces": "application/json",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "List of all providers",
+                        "schema": {
+                            "type": "array",
+                            "items": {}
+                        }
+                    }
+              }
+            },
+            "post": {
+                "summary": "Create a new provider",
+                "description": "Create a new provider",
+                "produces": "application/json",
+                "consumes": "application/json",
+                "parameters": {
+                   
+                },
+                "responses": {
+                    "200": {
+                        "description": "Provider created successfully",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
         }
     }
 }
