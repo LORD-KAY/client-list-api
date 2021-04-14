@@ -75,6 +75,34 @@ const clientController = {
       });
     }
   },
+  async delete(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const exists = await Clients.exists({ _id: id });
+      if (!exists) {
+        return res.status(409).json({
+          message: `Client doesn't exist`,
+          success: false,
+          timestamp: new Date().toISOString(),
+          path: req.path,
+        });
+      }
+      const response = await Clients.deleteOne({ _id: id });
+      // will return 204 with empty or no body
+      return res.status(204).json({
+        message: `Client successfully deleted`,
+        success: true,
+        data: response,
+      });
+    } catch (e) {
+      return res.status(500).json({
+        message: `Unable to delete client`,
+        path: req.path,
+        success: false,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  },
 };
 
 export default clientController;
